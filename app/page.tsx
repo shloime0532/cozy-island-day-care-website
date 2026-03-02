@@ -757,13 +757,15 @@ function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Image
-              src="/logo.png"
-              alt="Cozy Island Day Care"
-              width={140}
-              height={44}
-              className="h-10 w-auto mb-4 brightness-0 invert"
-            />
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 mb-4 inline-block">
+              <Image
+                src="/logo.png"
+                alt="Cozy Island Day Care"
+                width={140}
+                height={44}
+                className="h-10 w-auto"
+              />
+            </div>
             <p className="text-white/60 text-sm leading-relaxed">
               Nurturing growth, inspiring joy, and building bright futures for
               Lakewood&apos;s children since 2018.
