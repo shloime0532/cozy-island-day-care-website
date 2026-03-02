@@ -9,6 +9,8 @@ function useFadeUp() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    const items = el.querySelectorAll(".fade-up");
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -18,10 +20,19 @@ function useFadeUp() {
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.05, rootMargin: "0px 0px 50px 0px" }
     );
-    el.querySelectorAll(".fade-up").forEach((child) => observer.observe(child));
-    return () => observer.disconnect();
+    items.forEach((child) => observer.observe(child));
+
+    /* Safety fallback: reveal all after 1.5s in case observer doesn't fire */
+    const timeout = setTimeout(() => {
+      items.forEach((child) => child.classList.add("visible"));
+    }, 1500);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(timeout);
+    };
   }, []);
   return ref;
 }
@@ -48,7 +59,7 @@ function Nav() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 sm:h-20 items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center">
+          <a href="#" className="flex items-center rounded-lg bg-white/90 px-2 py-1">
             <Image
               src="/logo.png"
               alt="Cozy Island Day Care"
@@ -747,11 +758,11 @@ function Footer() {
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             <Image
-              src="/logo-white.png"
+              src="/logo.png"
               alt="Cozy Island Day Care"
               width={140}
               height={44}
-              className="h-10 w-auto mb-4"
+              className="h-10 w-auto mb-4 brightness-0 invert"
             />
             <p className="text-white/60 text-sm leading-relaxed">
               Nurturing growth, inspiring joy, and building bright futures for
