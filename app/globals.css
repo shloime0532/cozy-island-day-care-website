@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #4A90A4;
+  --primary-light: #5BA8BE;
+  --primary-dark: #3A7A8E;
+  --accent: #F7A072;
+  --accent-light: #FFBB96;
+  --accent-dark: #E8895A;
+  --light: #FFF8F3;
+  --text: #2C3E50;
+  --text-light: #5A6C7D;
+  --background: #ffffff;
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-primary-dark: var(--primary-dark);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-accent-dark: var(--accent-dark);
+  --color-light: var(--light);
+  --color-text: var(--text);
+  --color-text-light: var(--text-light);
+  --color-bg: var(--background);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-inter);
+}
+
+body {
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Fade-up animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* No-JS fallback */
+@media (prefers-reduced-motion: reduce) {
+  .fade-up {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+noscript ~ * .fade-up {
+  opacity: 1;
+  transform: none;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
